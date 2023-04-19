@@ -120,6 +120,12 @@ public class CommentController implements BaseController<CommentDtoRequest, Comm
 
     @Override
     @GetMapping("/news/{id}/comments")
+    @ApiOperation(value = "Retrieve comments by News ID", response = CommentDtoResponse.class, responseContainer = "List")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved the comments for the specified News ID"),
+            @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
+            @ApiResponse(code = 500, message = "Application failed to process the request")
+    })
     public ResponseEntity<List<CommentDtoResponse>> readCommentsByNewsId(@PathVariable Long id) {
         List<CommentDtoResponse> commentsByNewsId = service.readCommentsByNewsId(id);
         return ResponseEntity.ok(commentsByNewsId);
