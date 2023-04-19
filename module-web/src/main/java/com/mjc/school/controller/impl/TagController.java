@@ -91,7 +91,6 @@ public class TagController implements BaseController<TagDtoRequest, TagDtoRespon
     }
 
     @Override
-//    @PutMapping("/{id}")
     @PatchMapping("/{id}")
     @ApiOperation(value = "Update an existing tag", response = TagDtoResponse.class)
     @ApiResponses(value = {

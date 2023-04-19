@@ -95,7 +95,6 @@ public class NewsController implements BaseController<NewsDtoRequest, NewsDtoRes
     }
 
     @Override
-//    @PutMapping("/{id}")
     @PatchMapping("/{id}")
     @ApiOperation(value = "Update an existing news", response = NewsDtoResponse.class)
     @ApiResponses(value = {

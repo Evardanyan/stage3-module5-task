@@ -89,7 +89,6 @@ public class CommentController implements BaseController<CommentDtoRequest, Comm
     }
 
     @Override
-//    @PutMapping("/{id}")
     @PatchMapping("/{id}")
     @ApiOperation(value = "Update an existing comment", response = NewsDtoResponse.class)
     @ApiResponses(value = {

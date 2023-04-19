@@ -27,7 +27,7 @@ public class SwaggerConfiguration {
     public ApiInfo apiEndPointInfo() {
         return new ApiInfoBuilder().title("News Application Rest API")
                 .description("News Application API")
-                .contact(new Contact("MJC Supervisor", "mjc/finalexam", "mjc@epam.com"))
+                .contact(new Contact("Edgar Vardanyan", "mjc/finalexam", "e.vardan4an@gmail.com"))
                 .license("Apache 2.0")
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
                 .version("0.0.1-SNAPSHOT")
