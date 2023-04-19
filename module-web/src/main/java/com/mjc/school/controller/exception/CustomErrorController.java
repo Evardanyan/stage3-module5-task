@@ -1,5 +1,8 @@
 package com.mjc.school.controller.exception;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +18,12 @@ import java.time.OffsetDateTime;
 public class CustomErrorController implements ErrorController {
 
     @RequestMapping
+    @ApiOperation(value = "Handle errors")
+    @ApiResponses(value = {
+            @ApiResponse(code = 400, message = "Bad request"),
+            @ApiResponse(code = 404, message = "Not found"),
+            @ApiResponse(code = 500, message = "Internal server error")
+    })
     public ResponseEntity<CustomErrorResponse> handleError(HttpServletRequest request) {
         Integer statusCode = (Integer) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -40,6 +49,10 @@ public class CustomErrorController implements ErrorController {
         return new ResponseEntity<>(errorResponse, httpStatus);
     }
 
+    @ApiOperation(value = "Get error path")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved error path")
+    })
     public String getErrorPath() {
         return "/error";
     }

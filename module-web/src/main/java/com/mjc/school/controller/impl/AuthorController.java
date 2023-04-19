@@ -91,7 +91,8 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
     }
 
     @Override
-    @PutMapping("/{id}")
+//    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     @ApiOperation(value = "Update an existing author", response = AuthorDtoResponse.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully updated the author"),

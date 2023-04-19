@@ -37,7 +37,12 @@ public class CommentController implements BaseController<CommentDtoRequest, Comm
 
     @Override
     @GetMapping
-    @ApiOperation(value = "get a list of all news", response = CommentDtoResponse.class, responseContainer = "Page")
+    @ApiOperation(value = "get a list of all comments", response = CommentDtoResponse.class, responseContainer = "Page")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successfully retrieved the comments by news ID"),
+            @ApiResponse(code = 404, message = "News not found"),
+            @ApiResponse(code = 500, message = "Internal server error")
+    })
     public ResponseEntity<Page<CommentDtoResponse>> readAll(
             @RequestParam(value = "page", defaultValue = "0")
             @ApiParam(value = "Page number of the results", defaultValue = "10") int page,
@@ -84,7 +89,8 @@ public class CommentController implements BaseController<CommentDtoRequest, Comm
     }
 
     @Override
-    @PutMapping("/{id}")
+//    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     @ApiOperation(value = "Update an existing comment", response = NewsDtoResponse.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully updated the news"),
