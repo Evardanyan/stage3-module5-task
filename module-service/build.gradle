@@ -1,0 +1,13 @@
+dependencies {
+
+    implementation project(':module-repository')
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    testImplementation 'junit:junit:4.13.1'
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    implementation group: 'org.springframework', name: 'spring-aop', version: '5.3.18'
+    implementation 'org.aspectj:aspectjweaver:1.9.9'
+    testImplementation "org.mockito:mockito-core:3.+"
+    implementation 'org.mockito:mockito-junit-jupiter:3.8.0'
+
+}
+
