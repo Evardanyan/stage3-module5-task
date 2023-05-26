@@ -1,10 +1,45 @@
 plugins {
     id 'java-base'
+    id "org.sonarqube" version "3.3"
+    id 'jacoco'
 }
 
 wrapper {
     gradleVersion = gradlewVersion
 }
+
+
+jacoco {
+    toolVersion = "0.8.7"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+tasks.withType(Test) {
+    finalizedBy 'jacocoTestReport'
+}
+
+tasks.withType(JacocoReport) {
+    reports {
+        xml.enabled = true
+        csv.enabled = false
+        html.destination = file("${buildDir}/jacocoHtml")
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.host.url", "http://localhost:9000"  // replace with your SonarQube server URL
+        property "sonar.login", "5392c1af553cd404198e5c3dbad675aba20ef272"  // replace with your SonarQube user token
+        // If you want to add more properties
+        property "sonar.sources", "src/main"
+        property "sonar.tests", "src/test"
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.jacoco.reportPaths", "build/jacoco/test.exec"
+        property "sonar.junit.reportPaths", "build/test-results/test"
+    }
+}
+
+
 
 subprojects {
     apply plugin: 'java'
