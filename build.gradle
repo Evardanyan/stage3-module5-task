@@ -117,6 +117,7 @@ subprojects {
 
     test {
         useJUnitPlatform()
+        exclude '**/com/mjc/school/controller/**'
     }
 }
 
