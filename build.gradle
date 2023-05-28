@@ -131,7 +131,7 @@ subprojects {
 
     sonarqube {
         properties {
-            property "sonar.host.url", "http://192.168.33.10:9000"
+            property "sonar.host.url", "http://localhost:9000"
             property "sonar.login", "a719092aea7b3d5eb0a15490a7a3e3ee95f1b0c1"
             property "sonar.projectKey", "stage3-module5-task"
 
