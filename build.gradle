@@ -26,6 +26,21 @@ wrapper {
 //    }
 //}
 
+//sonarqube {
+//    properties {
+//        property "sonar.host.url", "http://localhost:9000"  // replace with your SonarQube server URL
+//        property "sonar.login", "5392c1af553cd404198e5c3dbad675aba20ef272"  // replace with your SonarQube user token
+//        // If you want to add more properties
+//        property "sonar.sources", "src/main"
+//        property "sonar.tests", "src/test"
+//        property "sonar.java.coveragePlugin", "jacoco"
+//        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+//
+//    }
+//}
+
+
+
 subprojects {
     apply plugin: 'java'
     apply plugin: 'jacoco'
@@ -113,11 +128,12 @@ subprojects {
         finalizedBy jacocoTestReport
     }
 
+
     sonarqube {
         properties {
-            property "sonar.host.url", "http://localhost:9000"  // replace with your SonarQube server URL
-            property "sonar.login", "5392c1af553cd404198e5c3dbad675aba20ef272"  // replace with your SonarQube user token
-            // If you want to add more properties
+            property "sonar.host.url", "http://localhost:9000"
+            property "sonar.login", "a719092aea7b3d5eb0a15490a7a3e3ee95f1b0c1"
+
             property "sonar.sources", "${project.projectDir}/src/main"
             property "sonar.tests", "${project.projectDir}/src/test"
             property "sonar.java.coveragePlugin", "jacoco"
