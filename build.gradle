@@ -113,7 +113,7 @@ subprojects {
 
 
     jacoco {
-        toolVersion = '0.8.8'
+        toolVersion = '0.8.7'
     }
 
     jacocoTestReport {
@@ -129,19 +129,19 @@ subprojects {
     }
 
 
-//    sonarqube {
-//        properties {
-//            property "sonar.host.url", "http://localhost:9000"
-//            property "sonar.login", "a719092aea7b3d5eb0a15490a7a3e3ee95f1b0c1"
-//            property "sonar.projectKey", "stage3-module5-task"
-//
-//            property "sonar.sources", "${project.projectDir}/src/main"
-//            property "sonar.tests", "${project.projectDir}/src/test"
-//            property "sonar.java.coveragePlugin", "jacoco"
-//            property "sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml"
-//
-//        }
-//    }
+    sonarqube {
+        properties {
+            property "sonar.host.url", "http://localhost:9000"
+            property "sonar.login", "5392c1af553cd404198e5c3dbad675aba20ef272"
+            property "sonar.projectKey", "stage3-module5-task"
+
+            property "sonar.sources", "${project.projectDir}/src/main"
+            property "sonar.tests", "${project.projectDir}/src/test"
+            property "sonar.java.coveragePlugin", "jacoco"
+            property "sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml"
+
+        }
+    }
 }
 
 
