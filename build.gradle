@@ -25,7 +25,12 @@ wrapper {
 //    finalizedBy jacocoTestReport
 //}
 
+apply plugin: 'war'
 
+war {
+    // Set the desired WAR file name
+    archiveFileName = 'myapp.war'
+}
 
 
 sonarqube {
@@ -154,11 +159,27 @@ subprojects {
 }
 
 
-task repack(type: Jar, dependsOn: ':module-main:build') {
+//task repack(type: Jar, dependsOn: ':module-main:build') {
+//    if (findProject(':module-main') != null) {
+//        entryCompression = ZipEntryCompression.STORED
+//        def buildJar = zipTree("${project(':module-main').buildDir}/libs/module-main.jar")
+//        from(buildJar) { into('/') }
+//        manifest {
+//            attributes(
+//                    'Main-Class': 'com.mjc.school.Main'
+//            )
+//        }
+//    }
+//}
+
+task repack(type: War, dependsOn: ':module-main:build') {
     if (findProject(':module-main') != null) {
         entryCompression = ZipEntryCompression.STORED
-        def buildJar = zipTree("${project(':module-main').buildDir}/libs/module-main.jar")
-        from(buildJar) { into('/') }
+        def buildWar = war {
+            from("${project(':module-main').buildDir}/libs/module-main.jar")
+            archiveFileName = 'myapp.war'
+        }
+        from(buildWar) { into('/') }
         manifest {
             attributes(
                     'Main-Class': 'com.mjc.school.Main'
