@@ -8,51 +8,38 @@ wrapper {
     gradleVersion = gradlewVersion
 }
 
-//apply plugin: 'jacoco'
-//
+apply plugin: 'jacoco'
+
 //jacoco {
-//    toolVersion = '0.8.5'
+//    toolVersion = '0.8.8'
 //}
-
-//test {
-//    finalizedBy jacocoTestReport
-//}
-
-
-//jacocoTestReport {
+//
+//jacocoTestReport() {
 //    reports {
 //        xml.enabled = true
 //        html.enabled = true
 //    }
 //}
-
-//sonarqube {
-//    properties {
-//        property "sonar.host.url", "http://localhost:9000"  // replace with your SonarQube server URL
-//        property "sonar.login", "5392c1af553cd404198e5c3dbad675aba20ef272"  // replace with your SonarQube user token
-//        // If you want to add more properties
-//        property "sonar.sources", "src/main"
-//        property "sonar.tests", "src/test"
-//        property "sonar.java.coveragePlugin", "jacoco"
-//        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
 //
-//    }
+//test {
+//    finalizedBy jacocoTestReport
 //}
 
 
-    sonarqube {
-        properties {
-            property "sonar.host.url", "http://localhost:9000"
-            property "sonar.login", "5392c1af553cd404198e5c3dbad675aba20ef272"
-            property "sonar.projectKey", "stage3-module5-task"
 
-            property "sonar.sources", "${project.projectDir}/src/main"
-            property "sonar.tests", "${project.projectDir}/src/test"
-            property "sonar.java.coveragePlugin", "jacoco"
-            property "sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml"
 
-        }
+sonarqube {
+    properties {
+        property "sonar.host.url", "http://localhost:9000"  // replace with your SonarQube server URL
+        property "sonar.login", "5392c1af553cd404198e5c3dbad675aba20ef272"  // replace with your SonarQube user token
+        // If you want to add more properties
+        property "sonar.sources", "src/main"
+        property "sonar.tests", "src/test"
+        property "sonar.java.coveragePlugin", "jacoco"
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacocoTestReport.xml"
+
     }
+}
 
 
 
