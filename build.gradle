@@ -172,12 +172,28 @@ subprojects {
 //    }
 //}
 
-task repack(type: War, dependsOn: ':module-main:build') {
+//task repack(type: War, dependsOn: ':module-main:build') {
+//    if (findProject(':module-main') != null) {
+//        entryCompression = ZipEntryCompression.STORED
+//        def buildWar = war {
+//            from("${project(':module-main').buildDir}/libs/module-main.jar")
+//            archiveFileName = 'myapp.war'
+//        }
+//        from(buildWar) { into('/') }
+//        manifest {
+//            attributes(
+//                    'Main-Class': 'com.mjc.school.Main'
+//            )
+//        }
+//    }
+//}
+
+task repack(type: Jar, dependsOn: ':module-main:build') {
     if (findProject(':module-main') != null) {
         entryCompression = ZipEntryCompression.STORED
         def buildWar = war {
             from("${project(':module-main').buildDir}/libs/module-main.jar")
-            archiveFileName = 'myapp.war'
+            archiveFileName = 'myapp.jar'
         }
         from(buildWar) { into('/') }
         manifest {
