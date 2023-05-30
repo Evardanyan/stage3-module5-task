@@ -21,7 +21,7 @@ public class AuthorControllerTest {
     @BeforeEach
     public void setUp() {
         RestAssured.baseURI = "http://localhost";
-        RestAssured.port = 8080;
+        RestAssured.port = 8081;
         RestAssured.basePath = "/api/v1";
 
 

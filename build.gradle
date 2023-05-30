@@ -1,5 +1,6 @@
 plugins {
-//    id 'java-base'
+    id 'java'
+    id 'java-base'
     id 'war'
     id "org.sonarqube" version "3.3"
     id 'jacoco'
@@ -9,40 +10,14 @@ wrapper {
     gradleVersion = gradlewVersion
 }
 
-//apply plugin: 'jacoco'
-
-//jacoco {
-//    toolVersion = '0.8.8'
-//}
-//
-//jacocoTestReport() {
-//    reports {
-//        xml.enabled = true
-//        html.enabled = true
-//    }
-//}
-//
-//test {
-//    finalizedBy jacocoTestReport
-//}
-
-//apply plugin: 'war'
-//
-//war {
-//    // Set the desired WAR file name
-//    archiveFileName = 'myapp.war'
-//}
-
 
 sonarqube {
     properties {
-        property "sonar.host.url", "http://localhost:9000"  // replace with your SonarQube server URL
-        property "sonar.login", "5392c1af553cd404198e5c3dbad675aba20ef272"  // replace with your SonarQube user token
-        // If you want to add more properties
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.login", "5392c1af553cd404198e5c3dbad675aba20ef272"
         property "sonar.sources", "src/main"
         property "sonar.tests", "src/test"
         property "sonar.java.coveragePlugin", "jacoco"
-//        property "sonar.coverage.jacoco.xmlReportPaths", "/var/lib/jenkins/workspace/test/build/sonar/jacocoTestReport.xml"
 
     }
 }
@@ -68,16 +43,16 @@ subprojects {
 //--------------------------Rest assurance----------------------------------------------------------
 
         // https://mvnrepository.com/artifact/org.hamcrest/hamcrest
-        testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
+//        testImplementation group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
 
 // https://mvnrepository.com/artifact/com.google.code.gson/gson
-        testImplementation group: 'com.google.code.gson', name: 'gson', version: '2.6.2'
+//        testImplementation group: 'com.google.code.gson', name: 'gson', version: '2.6.2'
 // https://mvnrepository.com/artifact/com.jayway.restassured/rest-assured
 //        testImplementation group: 'com.jayway.restassured', name: 'rest-assured', version: '2.9.0'
 
-        implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.0'
+//        implementation group: 'io.rest-assured', name: 'rest-assured', version: '5.3.0'
         // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
-        implementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.5'
+//        implementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.5'
 
         testImplementation "org.mockito:mockito-core:3.+"
 
@@ -106,8 +81,7 @@ subprojects {
         implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.7.7'
         // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-hateoas
         implementation group: 'org.springframework.boot', name: 'spring-boot-starter-hateoas', version: '2.7.7'
-        // https://mvnrepository.com/artifact/org.projectlombok/lombok
-        compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.26'
+
 
 
         implementation 'org.springframework:spring-aspects:5.3.13'
@@ -124,12 +98,6 @@ subprojects {
         toolVersion = '0.8.8'
     }
 
-//    jacocoTestReport {
-//        reports {
-//            xml.enabled = true
-//        }
-//    }
-
     jacocoTestReport {
         group = "Reporting"
         reports {
@@ -142,63 +110,25 @@ subprojects {
         exclude '**/com/mjc/school/controller/**'
         finalizedBy jacocoTestReport
     }
-
-
-//    sonarqube {
-//        properties {
-//            property "sonar.host.url", "http://localhost:9000"
-//            property "sonar.login", "5392c1af553cd404198e5c3dbad675aba20ef272"
-//            property "sonar.projectKey", "stage3-module5-task"
-//
-//            property "sonar.sources", "${project.projectDir}/src/main"
-//            property "sonar.tests", "${project.projectDir}/src/test"
-//            property "sonar.java.coveragePlugin", "jacoco"
-//            property "sonar.coverage.jacoco.xmlReportPaths", "${project.buildDir}/reports/jacoco/test/jacocoTestReport.xml"
-//
-//        }
-//    }
 }
 
 
-war {
-    // Set the desired WAR file name
-    archiveFileName = 'myapp.war'
 
-    // Include the necessary resources and classes in the WAR file
-    from sourceSets.main.output
-    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+task repack(type: Jar, dependsOn: ':module-main:build') {
+    if (findProject(':module-main') != null) {
+        entryCompression = ZipEntryCompression.STORED
+        def buildJar = zipTree("${project(':module-main').buildDir}/libs/module-main.jar")
+        from(buildJar) { into('/') }
+        manifest {
+            attributes(
+                    'Main-Class': 'com.mjc.school.Main'
+            )
+        }
+    }
 }
 
-//task repack(type: Jar, dependsOn: ':module-main:build') {
-//    if (findProject(':module-main') != null) {
-//        entryCompression = ZipEntryCompression.STORED
-//        def buildJar = zipTree("${project(':module-main').buildDir}/libs/module-main.jar")
-//        from(buildJar) { into('/') }
-//        manifest {
-//            attributes(
-//                    'Main-Class': 'com.mjc.school.Main'
-//            )
-//        }
-//    }
-//}
 
 
 
-//
-//task repack(type: War, dependsOn: ':module-main:build') {
-//    if (findProject(':module-main') != null) {
-//        entryCompression = ZipEntryCompression.STORED
-//        def buildWar = war {
-//            from("${project(':module-main').buildDir}/libs/module-main.jar")
-//            archiveFileName = 'myapp.war'
-//        }
-//        from(buildWar) { into('/') }
-//        manifest {
-//            attributes(
-//                    'Main-Class': 'com.mjc.school.Main'
-//            )
-//        }
-//    }
-//}
 
 

@@ -1,16 +1,14 @@
 package com.mjc.school.service.mapper;
 
 
-
-
 import com.mjc.school.repository.model.impl.AuthorModel;
 import com.mjc.school.service.dto.AuthorDtoRequest;
 import com.mjc.school.service.dto.AuthorDtoResponse;
-import org.mapstruct.*;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
+import org.mapstruct.Named;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

@@ -1,17 +1,49 @@
+//plugins {
+//    id 'application'
+//}
+//
+//dependencies {
+//    implementation project(':module-web')
+//    implementation project(':module-service')
+//}
+//
+//
+//run {
+//    standardInput = System.in
+//}
+
+
+
 plugins {
-    id 'application'
+    id 'org.springframework.boot' version '2.7.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'war'
 }
 
-mainClassName = 'com.mjc.school.Main'
+group = 'com.mjc.school'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
 
 dependencies {
     implementation project(':module-web')
     implementation project(':module-service')
+    // Spring Boot Starter Web dependency
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+}
 
+bootWar {
+    archiveFileName = 'newsmng.war'
+    archiveVersion = '1.0'
+}
+
+springBoot {
+    mainClass = 'com.mjc.school.Main'
 }
 
 
 
-run {
-    standardInput = System.in
-}
