@@ -1,11 +1,14 @@
 package com.mjc.school.controller.impl;
 
+
 import com.mjc.school.controller.BaseController;
 import com.mjc.school.controller.util.AuthorModelAssembler;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.AuthorDtoRequest;
 import com.mjc.school.service.dto.AuthorDtoResponse;
 import io.swagger.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,6 +26,8 @@ import javax.validation.Valid;
 @Validated
 @Api(tags = "Author Management", produces = "application/json", value = "Operations for creating, updating, retrieving and deleting news in the application")
 public class AuthorController implements BaseController<AuthorDtoRequest, AuthorDtoResponse, Long> {
+
+
 
     @Autowired
     private AuthorModelAssembler authorModelAssembler;
