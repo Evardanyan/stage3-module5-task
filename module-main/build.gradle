@@ -36,9 +36,24 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 
-bootWar {
-    archiveFileName = 'newsmng.war'
+//bootWar {
+//    archiveFileName = 'newsmng.war'
+//    archiveVersion = '1.0'
+//}
+
+//bootWar {
+//    archiveBaseName = 'newsmng'
+//    archiveVersion = '1.0'
+//}
+
+war {
+    enabled = true
+    archiveBaseName = 'newsmng'
     archiveVersion = '1.0'
+}
+
+bootWar {
+    enabled = false
 }
 
 springBoot {
