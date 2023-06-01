@@ -17,7 +17,7 @@ import java.time.OffsetDateTime;
 @RequestMapping("${server.error.path:${error.path:/error}}")
 public class CustomErrorController implements ErrorController {
 
-    @RequestMapping
+
     @ApiOperation(value = "Handle errors")
     @ApiResponses(value = {
             @ApiResponse(code = 400, message = "Bad request"),
