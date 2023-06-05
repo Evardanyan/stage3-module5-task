@@ -36,6 +36,18 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 
+jacoco {
+    toolVersion = '0.8.8'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
 //bootWar {
 //    archiveFileName = 'newsmng.war'
 //    archiveVersion = '1.0'
