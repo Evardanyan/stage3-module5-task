@@ -2,6 +2,7 @@ dependencies {
     implementation project(':module-service')
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
+    implementation project(path: ':module-repository')
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
 

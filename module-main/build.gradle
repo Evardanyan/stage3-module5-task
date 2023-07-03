@@ -32,8 +32,14 @@ repositories {
 dependencies {
     implementation project(':module-web')
     implementation project(':module-service')
+//    implementation project(path: ':module-repository')
+    implementation project(':module-security')
     // Spring Boot Starter Web dependency
-    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+//    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+
+
+
+
 }
 
 jacoco {

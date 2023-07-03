@@ -43,7 +43,9 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
     @ApiOperation(value = "Get a list of all authors", response = AuthorDtoResponse.class, responseContainer = "Page")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved the list of authors"),
-            @ApiResponse(code = 500, message = "Internal server error")
+            @ApiResponse(code = 500, message = "Internal server error"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 403, message = "Forbidden")
     })
     public ResponseEntity<Page<AuthorDtoResponse>> readAll(
             @RequestParam(value = "page", defaultValue = "0")
@@ -73,7 +75,9 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved the author with the supplied id"),
             @ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
-            @ApiResponse(code = 500, message = "Application failed to process the request")
+            @ApiResponse(code = 500, message = "Application failed to process the request"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 403, message = "Forbidden")
     })
     public ResponseEntity<AuthorDtoResponse> readById(@PathVariable Long id) {
         return new ResponseEntity<>(authorModelAssembler.addLinks(service.readById(id)), HttpStatus.OK);
@@ -86,7 +90,9 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Successfully created a new author"),
             @ApiResponse(code = 400, message = "Invalid author data"),
-            @ApiResponse(code = 500, message = "Internal server error")
+            @ApiResponse(code = 500, message = "Internal server error"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 403, message = "Forbidden")
     })
     public ResponseEntity<AuthorDtoResponse> create(
             @Valid @RequestBody
@@ -102,7 +108,9 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
             @ApiResponse(code = 200, message = "Successfully updated the author"),
             @ApiResponse(code = 400, message = "Invalid author data"),
             @ApiResponse(code = 404, message = "Author not found"),
-            @ApiResponse(code = 500, message = "Internal server error")
+            @ApiResponse(code = 500, message = "Internal server error"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 403, message = "Forbidden")
     })
     public ResponseEntity<AuthorDtoResponse> update(
             @PathVariable
@@ -121,7 +129,9 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "Successfully deleted the author"),
             @ApiResponse(code = 404, message = "Author not found"),
-            @ApiResponse(code = 500, message = "Internal server error")
+            @ApiResponse(code = 500, message = "Internal server error"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 403, message = "Forbidden")
     })
     public void deleteById(
             @PathVariable
@@ -134,7 +144,9 @@ public class AuthorController implements BaseController<AuthorDtoRequest, Author
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Successfully retrieved the author"),
             @ApiResponse(code = 404, message = "Author not found"),
-            @ApiResponse(code = 500, message = "Internal server error")
+            @ApiResponse(code = 500, message = "Internal server error"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 403, message = "Forbidden")
     })
     public ResponseEntity<AuthorDtoResponse> readAuthorByNewsId(
             @Valid @PathVariable
