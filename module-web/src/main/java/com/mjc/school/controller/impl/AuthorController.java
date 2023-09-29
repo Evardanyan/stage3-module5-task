@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(value = "/api/v1/authors")
 @Validated
 @Api(tags = "Author Management", produces = "application/json", value = "Operations for creating, updating, retrieving and deleting news in the application")

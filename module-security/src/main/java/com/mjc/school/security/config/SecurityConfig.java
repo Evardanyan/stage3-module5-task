@@ -43,14 +43,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .cors()
-                .and()
+//                .cors()
+//                .and()
                 .csrf().disable()
                 .sessionManagement()
 //                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
+                .antMatchers(OPTIONS, "/**").permitAll()
                 .antMatchers("/oauth2/**", "/login/**", "/", "/api/v1/auth/login").permitAll()
 //                .antMatchers( "/", "/api/v1/auth/login").permitAll()
                 .anyRequest().authenticated()
@@ -86,5 +87,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+
+
 
 }

@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(value = "/api/v1/comments")
 @Validated
 @Api(tags = "Comment Management", produces = "application/json", value = "Operations for creating, updating, retrieving and deleting news in the application")

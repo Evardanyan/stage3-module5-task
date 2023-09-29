@@ -20,6 +20,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping(value = "/api/v1/tags")
 @Validated
 @Api(tags = "Tag Management", produces = "application/json", value = "Operations for creating, updating, retrieving and deleting tag in the application")
@@ -104,8 +105,11 @@ public class TagController implements BaseController<TagDtoRequest, TagDtoRespon
             @ApiParam(value = "News ID", readOnly = true) Long id,
             @Valid @RequestBody
             @ApiParam(value = "Updated news data", required = true) TagDtoRequest updateRequest) {
+
         TagDtoRequest updatedRequest = new TagDtoRequest(id, updateRequest.name());
+        System.out.println("this is updated request 2" + updatedRequest);
         TagDtoResponse tagDtoResponse = service.update(updatedRequest);
+        System.out.println("this is updated request" + updatedRequest);
         return ResponseEntity.status(HttpStatus.OK).body(tagDtoResponse);
     }
 

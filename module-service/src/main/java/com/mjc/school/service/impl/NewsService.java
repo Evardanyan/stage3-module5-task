@@ -71,6 +71,36 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
         return mapper.modelToDto(newsModel);
     }
 
+//    @Override
+//    public NewsDtoResponse update(NewsDtoRequest dtoRequest) {
+//        NewsModel existingNewsModel = newsRepository.findById(dtoRequest.id())
+//                .orElseThrow(() -> new NotFoundException(
+//                        String.format(ServiceErrorCodeMessage.NEWS_ID_DOES_NOT_EXIST.getCodeMsg(), dtoRequest.id())
+//                ));
+//        existingNewsModel.setTitle(dtoRequest.title());
+//        existingNewsModel.setContent(dtoRequest.content());
+//
+//        if (dtoRequest.authorId() != null) {
+//            AuthorModel authorModel = authorRepository.findById(dtoRequest.authorId())
+//                    .orElseThrow(() -> new NotFoundException(
+//                            String.format(ServiceErrorCodeMessage.AUTHOR_ID_DOES_NOT_EXIST.getCodeMsg(), dtoRequest.authorId())
+//                    ));
+//            existingNewsModel.setAuthorModel(authorModel);
+//        }
+//        if (dtoRequest.tagId() != null) {
+//            TagModel tagModel = tagRepository.findById(dtoRequest.tagId())
+//                    .orElseThrow(() -> new NotFoundException(
+//                            String.format(ServiceErrorCodeMessage.TAG_ID_DOES_NOT_EXIST.getCodeMsg(), dtoRequest.tagId())
+//                    ));
+//            List<TagModel> tagModels = existingNewsModel.getTagModels();
+//            tagModels.add(tagModel);
+//            existingNewsModel.setTagModels(tagModels);
+//        }
+//        NewsModel updatedNewsModel = newsRepository.save(existingNewsModel);
+//        return mapper.modelToDto(updatedNewsModel);
+//    }
+
+
     @Override
     public NewsDtoResponse update(NewsDtoRequest dtoRequest) {
         NewsModel existingNewsModel = newsRepository.findById(dtoRequest.id())
@@ -93,12 +123,17 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
                             String.format(ServiceErrorCodeMessage.TAG_ID_DOES_NOT_EXIST.getCodeMsg(), dtoRequest.tagId())
                     ));
             List<TagModel> tagModels = existingNewsModel.getTagModels();
-            tagModels.add(tagModel);
+            boolean tagAlreadyPresent = tagModels.stream().anyMatch(existingTag -> existingTag.getId().equals(tagModel.getId()));
+            if (!tagAlreadyPresent) {
+                tagModels.add(tagModel);
+            }
+
             existingNewsModel.setTagModels(tagModels);
         }
         NewsModel updatedNewsModel = newsRepository.save(existingNewsModel);
         return mapper.modelToDto(updatedNewsModel);
     }
+
 
 
     @Override
