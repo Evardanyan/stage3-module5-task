@@ -100,7 +100,6 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
 //        return mapper.modelToDto(updatedNewsModel);
 //    }
 
-
     @Override
     public NewsDtoResponse update(NewsDtoRequest dtoRequest) {
         NewsModel existingNewsModel = newsRepository.findById(dtoRequest.id())
